@@ -110,9 +110,19 @@ class handler(BaseHTTPRequestHandler):
 
         except Exception as e:
             # Log error and return 500
+            return {
+                "statusCode": 500,
+                "headers": {
+                    "Content-Type": "text/plain"
+                },
+                "body": f"Internal Server Error: {str(e)}".encode('utf-8'),
+                "isBase64Encoded": False
+    }       
+            '''
             self.send_response(500)
             self.send_header('Content-Type', 'text/plain')
             self.end_headers()
             self.wfile.write(f"Internal Server Error: {str(e)}".encode('utf-8'))
+            '''
         
-        return
+        #return
