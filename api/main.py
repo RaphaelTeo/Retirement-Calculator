@@ -92,10 +92,21 @@ class handler(BaseHTTPRequestHandler):
             buf.close()
 
             # Send response
+            image_bytes = buf.read()
+            return {
+                "statusCode": 200,
+                "headers": {
+                    "Content-Type": "image/png"
+                },
+                "body": image_bytes,
+                "isBase64Encoded": True
+    }
+            '''
             self.send_response(200)
             self.send_header('Content-Type', 'image/png')
             self.end_headers()
             self.wfile.write(base64.b64decode(image_base64))
+            '''
 
         except Exception as e:
             # Log error and return 500
