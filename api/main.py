@@ -1,7 +1,11 @@
 from http.server import BaseHTTPRequestHandler
+import pandas as pd
+pd.set_option('display.float_format', '{:.0f}'.format)
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+from urllib.parse import parse_qs, urlparse
 
-class handler(BaseHTTPRequestHandler):
-    def create_df(retirement_age):
+def create_df(retirement_age):
         income = [yearly_income] * (retirement_age-init_age-1)
         zeroincome = [0] * (final_age-retirement_age)
         income.insert(0,0)
@@ -21,10 +25,27 @@ class handler(BaseHTTPRequestHandler):
         df['cumulative'] = cum_calc
         return df
 
-    def handler(request):
+class handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        # Parse query parameters
+        parsed_url = urlparse(self.path)
+        query_params = parse_qs(parsed_url.query)
+
+        # Extract parameters (with defaults if not provided)
+        name = query_params.get('name', ['Unknown'])[0]
+        try:
+            age = float(query_params.get('age', ['30'])[0])
+            retage = float(query_params.get('retage', ['60'])[0])
+            returns = float(query_params.get('returns', ['1.02'])[0])
+            income = float(query_params.get('income', ['90'])[0])
+            expenses = float(query_params.get('expenses', ['36'])[0])
+            init = float(query_params.get('init', ['100'])[0])
+        except ValueError:
+            age, retage, returns = 30, 60  # Fallback defaults for invalid inputs
+        '''
         query = request.get("query", {})
         name = query.get("age", "retage", "returns", "income", "expenses", "init")
-
+        '''
         init_age=age
         final_age = 121
         retirement_age_list = list(range(45,70,5))
