@@ -57,6 +57,6 @@ def handler(request):
             "headers": {
                 "Content-Type": "image/png"
             },
-            "body": plt,
+            "body": "plt",
             "isBase64Encoded": True
         }
