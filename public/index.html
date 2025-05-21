@@ -24,7 +24,7 @@
       const expenses = document.getElementById('expenses').value;
       const init = document.getElementById('init').value;
 
-      const url = `/api/user_image?age=${encodeURIComponent(age)}&retage=${encodeURIComponent(retage)}&returns=${encodeURIComponent(returns)}&income=${encodeURIComponent(income)}&expenses=${encodeURIComponent(expenses)}&init=${encodeURIComponent(init)}`;
+      const url = `/api/main?age=${encodeURIComponent(age)}&retage=${encodeURIComponent(retage)}&returns=${encodeURIComponent(returns)}&income=${encodeURIComponent(income)}&expenses=${encodeURIComponent(expenses)}&init=${encodeURIComponent(init)}`;
 
       const response = await fetch(url);
       if (response.ok) {
