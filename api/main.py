@@ -3,7 +3,7 @@ import pandas as pd
 pd.set_option('display.float_format', '{:.0f}'.format)
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
-matplotlib.use('Agg')  # Force non-interactive backend
+plt.use('Agg')  # Force non-interactive backend
 import io
 import base64
 from urllib.parse import parse_qs, urlparse
