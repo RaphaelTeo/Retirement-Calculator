@@ -41,7 +41,7 @@ class handler(BaseHTTPRequestHandler):
             expenses = float(query_params.get('expenses', ['36'])[0])
             init = float(query_params.get('init', ['100'])[0])
         except ValueError:
-            age, retage, returns = 30, 60  # Fallback defaults for invalid inputs
+            age, retage, returns, income, expenses, init = 30, 60,1.02,90,36,100  # Fallback defaults for invalid inputs
         '''
         query = request.get("query", {})
         name = query.get("age", "retage", "returns", "income", "expenses", "init")
