@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template, send_file
+from flask import Flask, request, render_template
+from flask_cors import CORS
 import pandas as pd
 pd.set_option('display.float_format', '{:.0f}'.format)
 import matplotlib
@@ -12,6 +13,7 @@ import sys
 import traceback
 
 app = Flask(__name__)
+CORS(app) # Enable CORS for all routes
 
 def create_df(age,retirement_age,final_age,age_lst,expenses_lst,income,init,returns):
         income_lst = [income] * (retirement_age-age-1)
