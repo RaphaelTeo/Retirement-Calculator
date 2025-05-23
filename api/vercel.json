@@ -14,7 +14,7 @@
         {
             "src": "/api/(.*)",
             "dest": "api/app.py",
-            "methods": ["GET", "POST"]
+            "methods": ["GET"]
         }
     ]
 }

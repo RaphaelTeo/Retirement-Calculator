@@ -33,11 +33,11 @@ def create_df(age,retirement_age,final_age,age_lst,expenses_lst,income,init,retu
         df['cumulative'] = cum_calc
         return df
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def index():
     error = None
     image_data = None
-    if request.method == 'POST':
+    if request.method == 'GET':
         try:
             age = int(request.form['age'])
             retage = int(request.form['retage'])
