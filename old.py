@@ -1,15 +1,32 @@
-from http.server import BaseHTTPRequestHandler
-import pandas as pd
-pd.set_option('display.float_format', '{:.0f}'.format)
-import matplotlib
-matplotlib.use('Agg')  # Force non-interactive backend
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
+from flask import Flask, request, send_file, render_template
 
-from urllib.parse import parse_qs, urlparse
+app = Flask(__name__)
 
 def simple_function(a,b,c):
     return a+b+c
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        name = request.form.get('age')
+        retage = request.form.get('retage')
+        returns = request.form.get('returns')
+        income = request.form.get('income')
+        expenses = request.form.get('expenses')
+        init = request.form.get('init')
+
+        if name and age and retage and returns and income and expenses and init:
+            try:
+                age = int(age)
+                out = simple_function(age, retage, returns)
+                return send_file(out, mimetype='text/plain', as_attachment=False, download_name='info.txt')
+            except ValueError:
+                return render_template('index.html', error="Age must be a number")
+        return render_template('index.html', error="Please provide name and age")
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
