@@ -33,7 +33,7 @@ def create_df(age,retirement_age,final_age,age_lst,expenses_lst,income,init,retu
         df['cumulative'] = cum_calc
         return df
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     error = None
     image_data = None
