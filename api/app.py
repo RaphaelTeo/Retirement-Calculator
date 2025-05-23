@@ -39,7 +39,7 @@ def create_df(age,retirement_age,final_age,age_lst,expenses_lst,income,init,retu
 def index():
     error = None
     image_data = None
-    if request.method == 'GET':
+    if request.method == 'POST':
         try:
             age = int(request.form['age'])
             retage = int(request.form['retage'])
